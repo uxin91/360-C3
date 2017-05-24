@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        /*first page*/
+        .one{
+            background-color: skyblue;
+            text-align:center;
+            padding-top:100px;
+        }
+        .one .logo{
+            background: url("images/logo.png");
+            width: 251px;
+            height: 186px;
+            margin:0 auto;
+        }
+        .one .text{
+            margin:50px;
+        }
+        .one .info{
+            background: url("images/info_1.png");
+            width: 772px;
+            height: 49px;
+            margin:0 auto;
+        }
+        /*second page*/
+        .two{
+            background-color: yellowgreen;
+            padding:0px 100px;
+        }
+        /*由于插件默认在two下面生成了一个div，所以他们的父盒子是生成的哪个div*/
+        .two>div{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .two .shield{
+            width: 430px;
+        }
+        .two .info{
+            /*background: url("images/info_2.png");*/
+            width: 635px;
+            /*height: 309px;*/
+        }
+        /*third page*/
+
+        .three{
+            background-color: lightskyblue;
+            position:relative;
+            padding:0 100px;
+            overflow: hidden;
+        }
+        .three>div{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+        .three .info{
+            background:url("images/info_3.png");
+            width: 631px;
+            height: 278px;
+        }
+        .three .circle{
+            background: url("images/circle.png");
+            width: 453px;
+            height: 449px;
+            margin:0 50px;
+        }
+        .three .rocket{
+            background: url("images/rocket.png");
+            width: 203px;
+            height: 204px;
+            position:absolute;
+            right:260px;
+            top:280px;
+        }
+        /*forth page*/
+        .four{
+            background-color: mediumpurple;
+            padding:0 100px;
+            position:relative;
+        }
+        .four>div{
+            display: flex;
+            justify-content: space-between;
+            align-items:center;
+        }
+        .four .search{
+            background: url("images/search.png");
+            width: 529px;
+            height: 66px;
+        }
+        .four .key{
+            width: 99px;
+            height: 22px;
+            background: url("images/key.png");
+            position: absolute;
+            left: 125px;
+            top:170px;
+        }
+        .four .result{
+            background: url("images/result.png");
+            width: 529px;
+            height: 372px;
+        }
+        .four .info{
+            background:url("images/info_4.png");
+            width: 612px;
+            height: 299px;
+        }
+        /*fifth page*/
+        .five{
+            background-color: deeppink;
+            overflow: hidden;
+        }
+        .five>div{
+            display: flex;
+            flex-direction:column;
+        }
+        .five .info{
+            width: 1077px;
+            height: 134px;
+            background: url("images/info_5.png") no-repeat;
+            margin:0 auto;
+            flex: 1;
+        }
+        .five .borser{
+            flex: 4;
+            width: 1020px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .five .toolbar{
+            background: url("images/toolbar.png") no-repeat;
+            width: 1004px;
+            height: 80px;
+            position: absolute;
+            top:20px;
+            left: 20px;
+        }
+        .five .extra{
+            background: url("images/extra.png");
+            width: 394px;
+            height: 29px;
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+        .five div[class^="column"]{
+            background-color: #fff;
+        }
+        .five .columnTop{
+            width: 1020px;
+            height: 20px;
+            top:0;
+            left:0;
+            position:absolute;
+        }
+        .five .columnBottom{
+            width: 1020px;
+            height: 20px;
+            bottom:0;
+            left:0;
+            position:absolute;
+        }
+        .five .columnLeft{
+            width: 20px;
+            height: 820px;
+            top:0;
+            right:0;
+            position:absolute;
+        }
+        .five .columnRight{
+            width: 20px;
+            height: 820px;
+            top:0;
+            left:0;
+            position:absolute;
+        }
+        /*动画开始*/
+        .one .text img{
+            opacity:0;
+            margin:0 30px;
+            transition:all 1s;
+        }
+        .one.animation .text img{
+            opacity: 1;
+            margin: 0;
+        }
+        .two .shield img:nth-child(3){
+            transform:translate(200px,300px) rotateX(200deg);
+            transition:all 1s;
+        }
+        .two.animation .shield img:nth-child(3){
+            transform:translate(0px,0px) rotateX(0deg);
+        }
+        .three .rocket{
+            transition:all 1s;
+            transform:translate(-200%,400%);
+        }
+        .three.animation .rocket{
+            transform:translate(0,0);
+        }
+        .four .search{
+            transition:all 1s;
+            width: 0;
+        }
+        .four .key{
+            transition:all 1s 1.5s;
+            width: 0;
+            transition-timing-function: steps(5);
+        }
+        .four.animation .search{
+            width: 529px;
+        }
+        .four.animation .key{
+            width: 99px;
+        }
+        .four .result{
+            width: 0;
+            opacity: 0;
+            transition:all 1s 3s;
+        }
+        .four.animation .result{
+            width: 529px;
+            opacity: 1;
+        }
+        .five .columnTop{
+            transform:translateX(-200%);
+            transition:all 1s;
+        }
+        .five .columnBottom{
+            transform:translateX(200%);
+            transition:all 1s;
+        }
+        .five .columnLeft{
+            transform:translateY(-200%);
+            transition:all 1s;
+        }
+        .five .columnRight{
+            transform:translateY(-200%);
+            transition:all 1s;
+        }
+        .five.animation .columnTop{
+            transform:translateX(0);
+            transition:all 1s;
+        }
+        .five.animation .columnBottom{
+            transform:translateX(0);
+            transition:all 1s;
+        }
+        .five.animation .columnLeft{
+            transform:translateY(0);
+            transition:all 1s;
+        }
+        .five.animation .columnRight{
+            transform:translateY(0);
+            transition:all 1s;
+        }
+    </style>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    <script>
+        $(function(){
+            $(".container").fullpage({
+                        afterLoad:function(anchorLink,index){
+                            console.log(index);
+                            $(".section").removeClass("animation");
+                            setTimeout(function () {
+                                $(".section").eq(index - 1).addClass("animation")
+                            }, 10)
+
+                        }
+                    }
+            );
+        })
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="section one">
+        <div class="logo">
+        </div>
+        <div class="text">
+            <img src="images/text_1.png" alt=""/><img src="images/text_2.png" alt=""/><img src="images/text_3.png"
+                                                                                           alt=""/><img
+                src="images/text_4.png" alt=""/><img src="images/text_5.png" alt=""/><img src="images/text_6.png"
+                                                                                          alt=""/><img
+                src="images/text_7.png" alt=""/><img src="images/text_8.png" alt=""/>
+        </div>
+        <div class="info"></div>
+    </div>
+    <div class="section two">
+        <div class="shield">
+            <img src="images/shield_1.png" alt=""/><img src="images/shield_2.png" alt=""/><img
+                src="images/shield_3.png" alt=""/><img src="images/shield_4.png" alt=""/><img
+                src="images/shield_5.png" alt=""/><img src="images/shield_6.png" alt=""/><img
+                src="images/shield_7.png" alt=""/><img src="images/shield_8.png" alt=""/><img
+                src="images/shield_9.png" alt=""/>
+        </div>
+        <div class="info">
+            <img src="images/info_2.png" alt=""/>
+        </div>
+    </div>
+    <div class="section three">
+        <div class="info"></div>
+        <div class="circle">
+
+        </div>
+        <div class="rocket"></div>
+    </div>
+    <div class="section four">
+        <div class="leftbox">
+        <div class="search"></div>
+        <div class="key"></div>
+        <div class="result"></div>
+        </div>
+        <div class="info">
+        </div>
+    </div>
+    <div class="section five">
+        <div class="info"></div>
+        <div class="borser">
+            <div class="toolbar"></div>
+            <div class="extra">
+            </div>
+            <!-- 柱子-->
+            <div class="columnTop"></div>
+            <div class="columnBottom"></div>
+            <div class="columnLeft"></div>
+            <div class="columnRight"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
